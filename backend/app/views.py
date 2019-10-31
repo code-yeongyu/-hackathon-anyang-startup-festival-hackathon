@@ -36,8 +36,6 @@ class VideoListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         backup_queryset = self.queryset
         self.queryset = Video.objects.filter(writer=request.user.id)
-        import pdb
-        pdb.set_trace()
         returning_value = self.list(request, *args, **kwargs)
         self.queryset = backup_queryset
         return returning_value
