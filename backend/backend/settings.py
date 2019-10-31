@@ -30,11 +30,25 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth',
-    'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'rest_framework', 'rest_framework.authtoken',
-    'django.contrib.staticfiles', 'corsheaders', 'drf_yasg', 'app'
+    'rest_framework.authtoken',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'rest_framework',
+    'django.contrib.staticfiles',
+    'corsheaders',
+    'drf_yasg',
+    'app',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
