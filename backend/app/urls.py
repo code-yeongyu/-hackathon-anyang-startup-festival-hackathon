@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^signup/$', views.sign_up),
     # video
     url(r'^upload/video/$', views.create_video),
-    url(r'^video/(?P<pk>[0-9]+)/$', views.VideoDetail.as_view()),
+    url(r'^video/(?P<pk>[0-9]+)/$', views.video),
     url(r'^video/$', views.VideoListAPIView.as_view()),
     # image
     url(r'^upload/image/$', views.create_image),

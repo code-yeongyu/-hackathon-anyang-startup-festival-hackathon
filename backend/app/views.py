@@ -1,3 +1,4 @@
+from urllib.parse import unquote
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
@@ -35,6 +36,8 @@ class VideoListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         backup_queryset = self.queryset
         self.queryset = Video.objects.filter(writer=request.user.id)
+        import pdb
+        pdb.set_trace()
         returning_value = self.list(request, *args, **kwargs)
         self.queryset = backup_queryset
         return returning_value
@@ -60,10 +63,20 @@ def create_image(request):
 @api_view(['GET'])
 def image(request, pk):  # 이미지 반환
     test_file = open(
-        settings.BASE_DIR + "/" +
-        str(get_object_or_404(Image, pk=pk).image.url), 'rb')
+        settings.BASE_DIR +
+        unquote(str(get_object_or_404(Image, pk=pk).image.url)), 'rb')
     return HttpResponse(content=test_file,
                         content_type="image/jpeg",
+                        status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def video(request, pk):  # 비디오 반환
+    test_file = open(
+        settings.BASE_DIR +
+        unquote(str(get_object_or_404(Video, pk=pk).video.url)), 'rb')
+    return HttpResponse(content=test_file,
+                        content_type="file",
                         status=status.HTTP_200_OK)
 
 
