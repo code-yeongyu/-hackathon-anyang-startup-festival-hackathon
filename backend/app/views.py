@@ -64,7 +64,7 @@ def image(request, pk):  # 이미지 반환
         settings.BASE_DIR +
         unquote(str(get_object_or_404(Image, pk=pk).image.url)), 'rb')
     return HttpResponse(content=test_file,
-                        content_type="image/jpeg",
+                        content_type="image",
                         status=status.HTTP_200_OK)
 
 
